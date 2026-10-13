@@ -210,18 +210,6 @@ define Device/cudy_lt300-v3
 endef
 TARGET_DEVICES += cudy_lt300-v3
 
-define Device/cudy_lt500-outdoor-v1
-  IMAGE_SIZE := 15872k
-  DEVICE_VENDOR := Cudy
-  DEVICE_MODEL := LT500 Outdoor
-  DEVICE_VARIANT := v1
-  DEVICE_PACKAGES := kmod-mt7615e kmod-mt7663-firmware-ap kmod-usb2 \
-	kmod-usb-ohci kmod-usb-net-cdc-ether kmod-usb-serial-option
-  UIMAGE_NAME := R35
-  SUPPORTED_DEVICES += R35
-endef
-TARGET_DEVICES += cudy_lt500-outdoor-v1
-
 define Device/cudy_m1200-v1
   IMAGE_SIZE := 15872k
   DEVICE_VENDOR := Cudy
@@ -254,15 +242,6 @@ define Device/cudy_tr1200-v1
   SUPPORTED_DEVICES += R46
 endef
 TARGET_DEVICES += cudy_tr1200-v1
-
-define Device/cudy_wr300-v1
-  IMAGE_SIZE := 7808k
-  DEVICE_VENDOR := Cudy
-  DEVICE_MODEL := WR300
-  DEVICE_VARIANT := v1
-  SUPPORTED_DEVICES += cudy,wr300
-endef
-TARGET_DEVICES += cudy_wr300-v1
 
 define Device/cudy_wr1000
   IMAGE_SIZE := 7872k
@@ -312,6 +291,17 @@ define Device/elecom_wrc-1167fs
   DEVICE_PACKAGES := kmod-mt76x2
 endef
 TARGET_DEVICES += elecom_wrc-1167fs
+
+define Device/ensitec_hlk-7628an
+  IMAGE_SIZE := 32448k
+  DEVICE_VENDOR := ENSITEC
+  DEVICE_MODEL := MODEM-V1
+  SUPPORTED_DEVICES := ensitec,v1
+  DEVICE_PACKAGES := kmod-i2c-mt7628 kmod-sdhci-mt7620 kmod-gpio-pca953x \
+	kmod-iio-core kmod-usb-net-qmi-wwan kmod-usb-serial-option \
+	kmod-usb2 kmod-usb-ohci uqmi
+endef
+TARGET_DEVICES += ensitec_hlk-7628an
 
 define Device/glinet_gl-mt300n-v2
   IMAGE_SIZE := 16064k

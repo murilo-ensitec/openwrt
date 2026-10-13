@@ -1,0 +1,51 @@
+#!/bin/sh /etc/rc.common
+
+# Since the boot script is 10 and network is 20.
+# The value 25 seems like a good priority to
+# mount the nand flash, not too soon or too late.
+START=10
+# Stop dosent really matter that much since we
+# just want to unmount the nand properly
+STOP=10
+
+USE_PROCD=1
+
+boot() {
+	local DEVICE="/dev/mtd7"
+	local MOUNT_DIR="/mnt/nand"
+
+	if [ ! -c "$DEVICE" ]; then
+		echo "nand_mount: warning: Device $DEV not found" >> /dev/kmsg
+		return 1;
+	fi
+
+	if [ ! -d $MOUNT_DIR ]; then
+		mkdir -p "$MOUNT_DIR"
+	fi
+
+	ubiattach -p "$DEVICE"
+	if [ ! -c /dev/ubi0_0  ]; then
+		ubidetach -p $DEVICE
+		ubiformat $DEVICE -y -q
+		ubiattach -p $DEVICE
+		ubimkvol /dev/ubi0 -m -N ext_nand
+	fi
+
+	if mount -t ubifs ubi0:ext_nand "$MOUNT_DIR"; then
+		echo "nand_mount: info: Successfully mounted ubi0:ext_nand to $MOUNT_DIR" >> /dev/kmsg
+	else
+		echo "nand_mount: error: Failed to mount $DEV" >> /dev/kmsg
+	fi
+}
+
+stop() {
+	local DEVICE="/dev/mtd7"
+	if [ -c /dev/ubi0_0  ]; then
+		echo "nand_mount: info: Unmounting $DEV" >> /dev/kmsg
+		umount ubi0:ext_nand
+		ubidetach -p $DEVICE
+	else
+		echo "nand_mount: warning: $DEV was already unmounted" >> /dev/kmsg
+	fi
+}
+

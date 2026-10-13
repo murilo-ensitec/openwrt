@@ -46,6 +46,7 @@ ramips_setup_interfaces()
 	asus,rt-ac1200-v2|\
 	hilink,hlk-7628n|\
 	hilink,hlk-7688a|\
+	ensitec,v1|\
 	hiwifi,hc5861b|\
 	keenetic,kn-1711|\
 	kroks,kndrt31r16|\
@@ -300,6 +301,7 @@ ramips_setup_macs()
 	cudy,wr1000|\
 	hilink,hlk-7628n|\
 	hilink,hlk-7688a|\
+	ensitec,v1|\
 	wavlink,wl-wn531a3|\
 	wavlink,wl-wn577a2|\
 	wavlink,wl-wn578a2|\

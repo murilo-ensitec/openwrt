@@ -1,0 +1,27 @@
+#!/bin/sh /etc/rc.common
+
+# Execution priority at boot and shutdown
+START=99
+STOP=10
+
+start() {
+	# NOP command to return 0 (success)
+	:
+}
+
+stop() {
+	# ============= turn off 24 Volts ============
+	echo 611 > /sys/class/gpio/export
+	echo out > /sys/class/gpio/gpio611/direction
+	echo 0 > /sys/class/gpio/gpio611/value
+	# ============= **************** =============
+
+	# ============= turn off 5 Volts =============
+	echo 623 > /sys/class/gpio/export
+	echo out > /sys/class/gpio/gpio623/direction
+	echo 0 > /sys/class/gpio/gpio623/value
+	# ============= **************** =============
+
+	echo "Cleanup finished."
+}
+

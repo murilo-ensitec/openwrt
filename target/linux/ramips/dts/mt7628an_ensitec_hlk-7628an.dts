@@ -1,0 +1,250 @@
+// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
+
+#include "mt7628an.dtsi"
+
+#include <dt-bindings/gpio/gpio.h>
+#include <dt-bindings/input/input.h>
+#include <dt-bindings/leds/common.h>
+
+/ {
+	compatible = "ensitec,v1", "mediatek,mt7628an-soc";
+	model = "ENSITEC MODEM-V1";
+
+	keys {
+		compatible = "gpio-keys";
+
+		reset {
+			label = "reset";
+			gpios = <&gpio 11 GPIO_ACTIVE_LOW>;
+			linux,code = <KEY_RESTART>;
+		};
+
+	};
+
+	leds {
+		compatible = "gpio-leds";
+
+		wlan {
+			label = "wifi_led";
+			function = LED_FUNCTION_WLAN;
+			color = <LED_COLOR_ID_GREEN>;
+			gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
+		};
+
+		led_porta1 {
+			label = "sts_led";
+			gpios = <&gpio_ext_1 0 GPIO_ACTIVE_LOW>;
+		};
+
+		led_porta2 {
+			label = "mode_led";
+			gpios = <&gpio_ext_3 0 GPIO_ACTIVE_LOW>;
+		};
+
+		led_eth0 {
+			label = "wan_led";
+			gpios = <&gpio_ext_3 1 GPIO_ACTIVE_LOW>;
+		};
+
+		led_eth1 {
+			label = "lan1_led";
+			gpios = <&gpio_ext_3 5 GPIO_ACTIVE_LOW>;
+		};
+
+		led_eth2 {
+			label = "lan2_led";
+			gpios = <&gpio_ext_3 4 GPIO_ACTIVE_LOW>;
+		};
+
+		led_eth3 {
+			label = "lan3_led";
+			gpios = <&gpio_ext_3 3 GPIO_ACTIVE_LOW>;
+		};
+
+		led_eth4 {
+			label = "lan4_led";
+			gpios = <&gpio_ext_3 2 GPIO_ACTIVE_LOW>;
+		};
+	};
+
+	vcc_3v3: regulator-3v3 {
+		compatible = "regulator-fixed";
+		regulator-name = "vcc-3v3";
+		regulator-min-microvolt = <3300000>;
+		regulator-max-microvolt = <3300000>;
+		regulator-always-on;
+	};
+
+	watchdog_gpio: watchdog-gpio {
+		compatible = "linux,wdt-gpio";
+		gpios = <&gpio 1 GPIO_ACTIVE_HIGH>;
+		hw_algo = "toggle";
+		hw_margin_ms = <60000>;
+		always-running;
+	};
+
+};
+
+&state_default {
+	gpio {
+		groups = "i2s", "p0led_an", "p1led_an", "p2led_an", "p3led_an", "p4led_an";
+		function = "gpio";
+	};
+};
+
+&uart1 {
+	status = "okay";
+	//linux,rs485-enabled-at-boot-time;
+	//rts-gpios = <&gpio 0 0>;
+};
+
+&spi0 {
+	status = "okay";
+	#address-cells = <1>;
+	#size-cells = <0>;
+	pinctrl-names = "default";
+	pinctrl-0 = <&spi_pins>, <&spi_cs1_pins>;
+
+	flash@0 {
+		compatible = "jedec,spi-nor";
+		reg = <0>;
+		spi-max-frequency = <40000000>;
+		broken-flash-reset;
+
+		partitions {
+			compatible = "fixed-partitions";
+			#address-cells = <1>;
+			#size-cells = <1>;
+
+			partition@0 {
+				label = "u-boot";
+				reg = <0x0 0x30000>;
+				read-only;
+			};
+
+			partition@30000 {
+				label = "u-boot-env";
+				reg = <0x30000 0x10000>;
+				read-only;
+			};
+
+			partition@40000 {
+				label = "factory";
+				reg = <0x40000 0x10000>;
+				read-only;
+
+				nvmem-layout {
+					compatible = "fixed-layout";
+					#address-cells = <1>;
+					#size-cells = <1>;
+
+					eeprom_factory_0: eeprom@0 {
+						reg = <0x0 0x400>;
+					};
+
+					macaddr_factory_28: macaddr@28 {
+						reg = <0x28 0x6>;
+					};
+				};
+			};
+
+			partition@50000 {
+				compatible = "denx,uimage";
+				label = "firmware";
+				reg = <0x50000 0x1fb0000>;
+			};
+		};
+	};
+
+	flash@1 {
+		compatible = "spi-nand";
+		reg = <1>;
+		spi-max-frequency = <40000000>;
+		broken-flash-reset;
+		partition@0 {
+			label = "ext_nand";
+			reg = <0x0 0x8000000>;
+		};
+	};
+};
+
+&ethernet {
+	nvmem-cells = <&macaddr_factory_28>;
+	nvmem-cell-names = "mac-address";
+};
+
+&wmac {
+	status = "okay";
+
+	nvmem-cells = <&eeprom_factory_0>;
+	nvmem-cell-names = "eeprom";
+};
+
+&esw {
+	status = "okay";
+	//mediatek,portmap = <0x47>;
+	//mediatek,portdisable = <0x38>;
+};
+
+&i2c {
+	status = "okay";
+
+	gpio_ext_1: pca9557@18 {
+		compatible = "nxp,pca9557";
+		reg = <0x18>;
+		vcc-supply = <&vcc_3v3>;
+		gpio-controller;
+		#gpio-cells = <2>;
+		gpio-line-names = "p_sts_led", "resetg", "selc", "liga_24v",
+				  "pwr_key", "rtsg", "usb_boot", "ctsg";
+	};
+
+	gpio_ext_2: pca9557@19 {
+		compatible = "nxp,pca9557";
+		reg = <0x19>;
+		vcc-supply = <&vcc_3v3>;
+		gpio-controller;
+		#gpio-cells = <2>;
+		gpio-line-names = "sd_cd", "gprs_en", "r_ret1", "r_cmd1",
+				  "r_cmd2", "r_ret2", "ed_d", "liga_5v";
+	};
+
+	gpio_ext_3: pca9557@1A {
+		compatible = "nxp,pca9557";
+		reg = <0x1A>;
+		vcc-supply = <&vcc_3v3>;
+		gpio-controller;
+		#gpio-cells = <2>;
+		gpio-line-names = "p_mode_led", "p_wan_led", "p_lan_led4", "p_lan_led3",
+				  "p_lan_led2", "p_lan_led1", "e_ledsel", "term_rs485";
+	};
+
+	analogica_1: adc@50 {
+		compatible = "ti,adc121c027";
+		reg = <0x50>;
+	};
+
+	analogica_2: adc@51 {
+		compatible = "ti,adc121c027";
+		reg = <0x51>;
+	};
+
+	analogica_3: adc@52 {
+		compatible = "ti,adc121c027";
+		reg = <0x52>;
+	};
+};
+
+&usbphy {
+    status = "okay";
+};
+
+&ehci {
+    status = "okay";
+    dr_mode = "host";
+};
+
+&ohci {
+    status = "okay";
+    dr_mode = "host";
+};
