@@ -1,0 +1,108 @@
+# Put your custom commands here that should be executed once
+# the system init finished. By default this file does nothing.
+
+chmod 600 /usr/share/ucode/luci/dispatcher.uc
+
+chmod 644 /www/luci-static/bootstrap/cascade.css
+chmod 644 /www/luci-static/bootstrap/logo-white.svg
+chmod 644 /usr/share/ucode/luci/template/themes/bootstrap/header.ut
+chmod 644 /usr/share/ucode/luci/template/themes/bootstrap/footer.ut
+
+chmod 755 /opt/python_services/*
+chmod 755 /opt/python_services/modbus_devices/*
+chmod 755 /etc/init.d/measurement_service
+chmod 755 /etc/init.d/mqtt_service
+chmod 755 /etc/init.d/pulse_counter
+chmod 755 /etc/init.d/modbus_daemon
+
+chmod 755 /opt/leds_ethernet/leds_ethernet.sh
+chmod 755 /etc/init.d/leds_ethernet
+
+chmod 755 /opt/modem4G/watchdog_modem.sh
+
+# Entradas digitais
+#echo '514' > /sys/class/gpio/export
+#echo '515' > /sys/class/gpio/export
+
+# Reles analogicas
+echo '552' > /sys/class/gpio/export
+echo 'out' > /sys/class/gpio/gpio552/direction
+echo '553' > /sys/class/gpio/export
+echo 'out' > /sys/class/gpio/gpio553/direction
+echo '554' > /sys/class/gpio/export
+echo 'out' > /sys/class/gpio/gpio554/direction
+
+#Pino RTS RS485
+echo '512' > /sys/class/gpio/export
+echo 'out' > /sys/class/gpio/gpio512/direction
+
+#IO ext 1
+echo '609' > /sys/class/gpio/export #GPRS RESETG
+echo 'out' > /sys/class/gpio/gpio609/direction
+echo '0' > /sys/class/gpio/gpio609/value
+
+echo '610' > /sys/class/gpio/export #GPRS SELC
+echo 'out' > /sys/class/gpio/gpio610/direction
+echo '0' > /sys/class/gpio/gpio610/value
+
+echo '611' > /sys/class/gpio/export #Liga 24V
+echo 'out' > /sys/class/gpio/gpio611/direction
+echo '1' > /sys/class/gpio/gpio611/value
+
+echo '612' > /sys/class/gpio/export #PWRKEY
+echo 'out' > /sys/class/gpio/gpio612/direction
+echo '1' > /sys/class/gpio/gpio612/value
+
+echo '613' > /sys/class/gpio/export #RTSG
+echo 'out' > /sys/class/gpio/gpio613/direction
+echo '0' > /sys/class/gpio/gpio613/value
+
+echo '614' > /sys/class/gpio/export #USB BOOT
+echo 'out' > /sys/class/gpio/gpio614/direction
+echo '0' > /sys/class/gpio/gpio614/value
+
+echo '615' > /sys/class/gpio/export #CTSG
+echo 'out' > /sys/class/gpio/gpio615/direction
+echo '0' > /sys/class/gpio/gpio615/value
+
+# IO ext 2
+#echo '616' SD_CD
+echo '617' > /sys/class/gpio/export #GPRS EN
+echo 'out' > /sys/class/gpio/gpio617/direction
+echo '1' > /sys/class/gpio/gpio617/value
+
+echo '618' > /sys/class/gpio/export #R_RET1
+echo 'in' > /sys/class/gpio/gpio618/direction
+
+echo '619' > /sys/class/gpio/export #R_CMD1
+echo 'out' > /sys/class/gpio/gpio619/direction
+echo '0' > /sys/class/gpio/gpio619/value
+
+echo '620' > /sys/class/gpio/export #R_CMD2
+echo 'out' > /sys/class/gpio/gpio620/direction
+echo '0' > /sys/class/gpio/gpio620/value
+
+echo '621' > /sys/class/gpio/export #R_RET2
+echo 'in' > /sys/class/gpio/gpio621/direction
+
+#622: ED_D (Definido no DTS)
+
+echo '623' > /sys/class/gpio/export #LIGA_5V
+echo 'out' > /sys/class/gpio/gpio623/direction
+echo '1' > /sys/class/gpio/gpio623/value
+
+
+### IO ext 3
+#624-629: (Definido no DTS)
+echo '630' > /sys/class/gpio/export #E_LEDSEL
+echo 'out' > /sys/class/gpio/gpio630/direction
+echo '1' > /sys/class/gpio/gpio630/value
+
+echo '631' > /sys/class/gpio/export #TERM_RS485
+echo 'out' > /sys/class/gpio/gpio631/direction
+echo '0' > /sys/class/gpio/gpio631/value
+
+
+echo "SNMP Funcionando!" > /tmp/test
+
+exit 0

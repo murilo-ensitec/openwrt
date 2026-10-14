@@ -12,6 +12,8 @@ uci set network.cwan.metric='30'
 uci set network.cwan.delay='10'
 uci set network.cwan.rawip='1'
 
+uci set network.wan.metric='10'
+
 uci commit network
 
 uci add_list firewall.@zone[1].network='cwan'
