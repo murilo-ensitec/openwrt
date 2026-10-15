@@ -1,5 +1,6 @@
 #!/bin/sh
 
+# Configuring the simcom UCI Interface
 uci set network.cwan=interface
 uci set network.cwan.proto='qmi'
 uci set network.cwan.device='/dev/cdc-wdm0'
@@ -12,7 +13,12 @@ uci set network.cwan.metric='30'
 uci set network.cwan.delay='10'
 uci set network.cwan.rawip='1'
 
+# Configuring the Ethernet UCI Interface
 uci set network.wan.metric='10'
+uci set network.wan.ipaddr='192.168.5.1/24'
+
+# Configuring the LAN UCI Network Interface
+uci set network.lan.ipaddr='192.168.5.1/24'
 
 uci commit network
 
