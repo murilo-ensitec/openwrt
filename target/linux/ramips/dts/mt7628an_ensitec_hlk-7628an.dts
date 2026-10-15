@@ -85,10 +85,61 @@
 
 };
 
+&gpio {
+	gpio-line-names = "I2S_SDI",
+		"I2S_SDO",
+		"I2S_WS",
+		"I2S_CLK",
+		"I2C_SCLK",
+		"I2C_SD",
+		"SPI_CS1",
+		"SPI_CLK",
+		"SPI_MOSI",
+		"SPI_MISO",
+		"SPI_CS0",
+		"GPIO0",
+		"UART_TXD0",
+		"UART_RXD0",
+		"MDI_TP_P1",
+		"MDI_TN_P1",
+		"MDI_RP_P1",
+		"MDI_RN_P1",
+		"MDI_RP_P2",
+		"MDI_RN_P2",
+		"MDI_TP_P2",
+		"MDI_TN_P2",
+		"MDI_TP_P3",
+		"MDI_TN_P3",
+		"MDI_RP_P3",
+		"MDI_RN_P3",
+		"MDI_RP_P4",
+		"MDI_RN_P4",
+		"MDI_TP_P4",
+		"MDI_TN_P4",
+		"P4_LED_KN",
+		"P3_LED_KN",
+		"P2_LED_KN",
+		"P1_LED_KN",
+		"P0_LED_KN",
+		"WLED_KN",
+		"PERST_N",
+		"REF_CLKO",
+		"WDT_RST_N",
+		"EPHY_LED4_N_JTRST_N",
+		"EPHY_LED3_N_JTCLK",
+		"EPHY_LED2_N_JTMS",
+		"EPHY_LED1_N_JTDI",
+		"EPHY_LED0_N_JTDO",
+		"WLED_N",
+		"UART_TXD1",
+		"UART_RXD1";
+};
+
 &state_default {
 	gpio {
 		groups = "i2s", "p0led_an", "p1led_an", "p2led_an", "p3led_an", "p4led_an";
 		function = "gpio";
+
 	};
 };
 
