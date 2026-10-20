@@ -1,0 +1,114 @@
+# -- Defaults --
+config agent
+        option agentaddress 'UDP:161,UDP6:161'
+
+config agentx
+        option agentxsocket '/var/run/agentx.sock'
+
+config com2sec 'public'
+        option secname 'ro'
+        option source 'default'
+        option community 'public'
+
+config com2sec 'private'
+        option secname 'rw'
+        option source 'localhost'
+        option community 'private'
+
+config com2sec6 'public6'
+        option secname 'ro'
+        option source 'default'
+        option community 'public'
+
+config com2sec6 'private6'
+        option secname 'rw'
+        option source 'localhost'
+        option community 'private'
+
+config group 'public_v1'
+        option group 'public'
+        option version 'v1'
+        option secname 'ro'
+
+config group 'public_v2c'
+        option group 'public'
+        option version 'v2c'
+        option secname 'ro'
+
+config group 'public_usm'
+        option group 'public'
+        option version 'usm'
+        option secname 'ro'
+
+config group 'private_v1'
+        option group 'private'
+        option version 'v1'
+        option secname 'rw'
+
+config group 'private_v2c'
+        option group 'private'
+        option version 'v2c'
+        option secname 'rw'
+
+config group 'private_usm'
+        option group 'private'
+        option version 'usm'
+        option secname 'rw'
+
+config view 'all'
+        option viewname 'all'
+        option type 'included'
+        option oid '.1'
+
+config access 'public_access'
+        option group 'public'
+        option context 'none'
+        option version 'any'
+        option level 'noauth'
+        option prefix 'exact'
+        option read 'all'
+        option write 'none'
+        option notify 'none'
+
+config access 'private_access'
+        option group 'private'
+        option context 'none'
+        option version 'any'
+        option level 'noauth'
+        option prefix 'exact'
+        option read 'all'
+        option write 'all'
+        option notify 'all'
+
+config exec
+        option name 'filedescriptors'
+        option prog '/bin/cat'
+        option args '/proc/sys/fs/file-nr'
+
+config engineid
+        option engineidtype '3'
+        option engineidnic 'eth0'
+
+config snmpd 'general'
+        option enabled '1'
+        option ip_protocol 'ipv4/ipv6'
+        option snmp_port '161'
+        option snmp_version 'v1/v2c'
+
+config exec
+        option name 'sys_temp'
+        option prog '/usr/bin/snmp_temp.sh'
+#       option miboid   1.2.3.4
+
+# -- Ensitec Modem SNMP Configuration --
+config pass
+        option name 'device_info'
+	option miboid '.1.3.6.1.4.1.48690.1'
+	option prog '/etc/snmp-services/device-info.sh'
+	option persist '0'
+
+config pass
+        option name 'gps_info'
+	option miboid '.1.3.6.1.4.1.48690.3'
+	option prog '/etc/snmp-services/gps-info.sh'
+	option persist '0'
