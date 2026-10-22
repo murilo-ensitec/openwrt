@@ -357,7 +357,7 @@ function GetTemperature(serial)
 
 		local val = line:match("^%+CPMUTEMP:%s*([%d%.%-]+)")
 		if val then
-			temp = val
+			temp = val * 10
 		end
 	end
 
@@ -422,32 +422,142 @@ function GetDailyBytes(iface)
 	return sent_today, received_today
 end
 
+function GetWeeklyBytes(iface)
+	local current_week = tostring(os.date("%Y-%W"))
+	local stats_file = "/etc/modem_weekly_stats"
+
+	local cur_sent, cur_received = GetNetworkBytes(iface)
+	local cur_tx = tonumber(cur_sent) or 0
+	local cur_rx = tonumber(cur_received) or 0
+
+	local stored_week, base_tx, base_rx, acc_tx, acc_rx = "", 0, 0, 0, 0
+	local f = io.open(stats_file, "r")
+	if f then
+		local line = f:read("*l")
+		f:close()
+		if line then
+			stored_week, base_tx, base_rx, acc_tx, acc_rx =
+			    line:match("^(%S+)%s+(%d+)%s+(%d+)%s+(%d+)%s+(%d+)$")
+			base_tx                                       = tonumber(base_tx) or 0
+			base_rx                                       = tonumber(base_rx) or 0
+			acc_tx                                        = tonumber(acc_tx) or 0
+			acc_rx                                        = tonumber(acc_rx) or 0
+		end
+	end
+
+	if stored_week ~= current_week or cur_tx < base_tx or cur_rx < base_rx then
+		stored_week = current_week
+		base_tx = cur_tx
+		base_rx = cur_rx
+		acc_tx = 0
+		acc_rx = 0
+
+		local wf = io.open(stats_file, "w")
+		if wf then
+			wf:write(string.format("%s %d %d %d %d\n", current_week, base_tx, base_rx, acc_tx, acc_rx))
+			wf:close()
+		end
+	end
+
+	local sent_week = tostring((cur_tx - base_tx) + acc_tx)
+	local received_week = tostring((cur_rx - base_rx) + acc_rx)
+
+	return sent_week, received_week
+end
+
+function GetMonthlyBytes(iface)
+	local current_month = tostring(os.date("%Y-%m"))
+	local stats_file = "/etc/modem_monthly_stats"
+
+	local cur_sent, cur_received = GetNetworkBytes(iface)
+	local cur_tx = tonumber(cur_sent) or 0
+	local cur_rx = tonumber(cur_received) or 0
+
+	local stored_month, base_tx, base_rx, acc_tx, acc_rx = "", 0, 0, 0, 0
+	local f = io.open(stats_file, "r")
+	if f then
+		local line = f:read("*l")
+		f:close()
+		if line then
+			stored_month, base_tx, base_rx, acc_tx, acc_rx =
+			    line:match("^(%S+)%s+(%d+)%s+(%d+)%s+(%d+)%s+(%d+)$")
+			base_tx                                        = tonumber(base_tx) or 0
+			base_rx                                        = tonumber(base_rx) or 0
+			acc_tx                                         = tonumber(acc_tx) or 0
+			acc_rx                                         = tonumber(acc_rx) or 0
+		end
+	end
+
+	if stored_month ~= current_month or cur_tx < base_tx or cur_rx < base_rx then
+		stored_month = current_month
+		base_tx = cur_tx
+		base_rx = cur_rx
+		acc_tx = 0
+		acc_rx = 0
+
+		local wf = io.open(stats_file, "w")
+		if wf then
+			wf:write(string.format("%s %d %d %d %d\n", current_month, base_tx, base_rx, acc_tx, acc_rx))
+			wf:close()
+		end
+	end
+
+	local sent_month = tostring((cur_tx - base_tx) + acc_tx)
+	local received_month = tostring((cur_rx - base_rx) + acc_rx)
+
+	return sent_month, received_month
+end
+
 function GetIP(serial)
-    local ip = "unknown"
-    serial:write("AT+CGPADDR\r\n")
+	local ip = "unknown"
+	serial:write("AT+CGPADDR\r\n")
 
-    while true do
-        local line = serial:read("*l")
-        if not line then break end
+	while true do
+		local line = serial:read("*l")
+		if not line then break end
 
-        line = Trim(line)
+		line = Trim(line)
 
-        if line == "OK" or line == "ERROR" or line:find("+CME ERROR") then
-            break
-        end
+		if line == "OK" or line == "ERROR" or line:find("+CME ERROR") then
+			break
+		end
 
-        -- Parse unquoted (+CGPADDR: 1,10.67.4.37) or quoted (+CGPADDR: 1,"10.67.4.37") formats
-        local _, addr = line:match('^+CGPADDR:%s*(%d+),%s*"?([^",%s]+)"?')
-        if addr then
-            local ipv4 = addr:match("(%d+%.%d+%.%d+%.%d+)")
-            if ipv4 and ipv4 ~= "0.0.0.0" then
-                ip = ipv4
-                break
-            end
-        end
-    end
+		-- Parse unquoted (+CGPADDR: 1,10.67.4.37) or quoted (+CGPADDR: 1,"10.67.4.37") formats
+		local _, addr = line:match('^+CGPADDR:%s*(%d+),%s*"?([^",%s]+)"?')
+		if addr then
+			local ipv4 = addr:match("(%d+%.%d+%.%d+%.%d+)")
+			if ipv4 and ipv4 ~= "0.0.0.0" then
+				ip = ipv4
+			end
+		end
+	end
 
-    return ip
+	return ip
+end
+
+function GetCCID(serial)
+	local data = "-1"
+
+	serial:write("AT+CICCID\r\n")
+
+	while true do
+		local line = serial:read("*l")
+		if not line then break end
+
+		line = Trim(line)
+
+		if line == "OK" or line == "ERROR" then
+			break
+		end
+
+		local ccid = line:match("^%+ICCID:%s*([%d%.%-]+)")
+		ccid = Trim(ccid)
+		if ccid:match("^[0-9]+$") then
+			data = ccid
+		end
+	end
+
+	return data
 end
 
 local serial, err = io.open("/dev/ttyUSB3", "r+")
@@ -501,24 +611,32 @@ WriteTmp("temperature", Temperature)
 
 SimComIface = "wwan0"
 Sent, Received = GetNetworkBytes(SimComIface)
-Sent_today, Received_today = GetDailyBytes(SimComIface)
+SentToday, ReceivedToday = GetDailyBytes(SimComIface)
+SentCurrentWeek, ReceivedCurrentWeek = GetWeeklyBytes(SimComIface)
+SentCurrentMonth, ReceivedCurrentMonth = GetMonthlyBytes(SimComIface)
 WriteTmp("sent", Sent)
 WriteTmp("received", Received)
-WriteTmp("sent_today", Sent_today)
-WriteTmp("received_today", Received_today)
+WriteTmp("sent_today", SentToday)
+WriteTmp("received_today", ReceivedToday)
+WriteTmp("sent_current_week", SentCurrentWeek)
+WriteTmp("received_current_week", ReceivedCurrentWeek)
+WriteTmp("sent_current_month", SentCurrentMonth)
+WriteTmp("received_current_month", ReceivedCurrentMonth)
 
 SimComIp = GetIP(serial)
 WriteTmp("ip", SimComIp)
 
+ICCID = GetCCID(serial)
+WriteTmp("iccid", ICCID)
 
 serial:close()
+-- /tmp/modem_num
+-- /tmp/modem_index
+-- /tmp/modem_descr
 -- /tmp/modem_imei -- Done
 -- /tmp/modem_model -- Done
 -- /tmp/modem_manufacturer -- Done
 -- /tmp/modem_revision -- Done
--- /tmp/modem_num   ?
--- /tmp/modem_index ?
--- /tmp/modem_descr ?
 -- /tmp/modem_serial -- Done
 -- /tmp/modem_imsi -- Done
 -- /tmp/modem_sim_state -- Done
@@ -539,3 +657,8 @@ serial:close()
 -- /tmp/modem_ip -- Done
 -- /tmp/modem_sent_today -- Done
 -- /tmp/modem_received_today -- Done
+-- /tmp/modem_sent_current_week -- Done
+-- /tmp/modem_received_current_week -- Done
+-- /tmp/modem_sent_current_month -- Done
+-- /tmp/modem_received_current_month -- Done
+-- /tmp/modem_iccid -- Done

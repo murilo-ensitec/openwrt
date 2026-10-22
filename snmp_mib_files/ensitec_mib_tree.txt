@@ -1,0 +1,465 @@
++--iso(1)
+   |
+   +--org(3)
+      |
+      +--dod(6)
+         |
+         +--internet(1)
+            |
+            +--directory(1)
+            |
+            +--mgmt(2)
+            |  |
+            |  +--mib-2(1)
+            |     |
+            |     +--transmission(10)
+            |
+            +--experimental(3)
+            |
+            +--private(4)
+            |  |
+            |  +--enterprises(1)
+            |     |
+            |     +--ensitec(48690)
+            |        |
+            |        +--ensitecSnmpGroups(0)
+            |        |  |
+            |        |  +--deviceGroup(1)
+            |        |  +--modemGroup(2)
+            |        |  +--trapGroup(4)
+            |        |  +--hotspotGroup(5)
+            |        |  +--ioGroup(6)
+            |        |  +--radioGroup(7)
+            |        |  +--wIfaceGroup(8)
+            |        |  +--iVlanGroup(9)
+            |        |  +--pVlanGroup(10)
+            |        |  +--queueVlanGroup(11)
+            |        |  +--mwan3Group(12)
+            |        |  +--portGroup(12)
+            |        |
+            |        +--device(1)
+            |        |  |
+            |        |  +-- -R-- String    serial(1)
+            |        |  |        Textual Convention: DisplayString
+            |        |  |        Size: 0..255
+            |        |  +-- -R-- String    deviceName(2)
+            |        |  |        Textual Convention: DisplayString
+            |        |  |        Size: 0..255
+            |        |  +-- -R-- String    productCode(3)
+            |        |  |        Textual Convention: DisplayString
+            |        |  |        Size: 0..255
+            |        |  +-- -R-- String    batchNumber(4)
+            |        |  |        Textual Convention: DisplayString
+            |        |  |        Size: 0..255
+            |        |  +-- -R-- String    hardwareRevision(5)
+            |        |  |        Textual Convention: DisplayString
+            |        |  |        Size: 0..255
+            |        |  +-- -R-- String    fwVersion(6)
+            |        |  |        Textual Convention: DisplayString
+            |        |  |        Size: 0..255
+            |        |  +-- -R-- String    deviceUptime(7)
+            |        |  |        Textual Convention: DisplayString
+            |        |  |        Size: 0..255
+            |        |  +-- -R-- String    cpuUsage(8)
+            |        |           Textual Convention: DisplayString
+            |        |           Size: 0..255
+            |        |
+            |        +--mobile(2)
+            |        |  |
+            |        |  +-- -R-- Integer32 modemNum(1)
+            |        |  |
+            |        |  +--modemTable(2)
+            |        |  |  |
+            |        |  |  +--modemEntry(1)
+            |        |  |     |  Index: mIndex
+            |        |  |     |
+            |        |  |     +-- -R-- Integer32 mIndex(1)
+            |        |  |     |        Range: 1..2147483647
+            |        |  |     +-- -R-- String    mDescr(2)
+            |        |  |     |        Textual Convention: DisplayString
+            |        |  |     |        Size: 0..255
+            |        |  |     +-- -R-- String    mImei(3)
+            |        |  |     |        Textual Convention: DisplayString
+            |        |  |     |        Size: 0..255
+            |        |  |     +-- -R-- String    mModel(4)
+            |        |  |     |        Textual Convention: DisplayString
+            |        |  |     |        Size: 0..255
+            |        |  |     +-- -R-- String    mManufacturer(5)
+            |        |  |     |        Textual Convention: DisplayString
+            |        |  |     |        Size: 0..255
+            |        |  |     +-- -R-- String    mRevision(6)
+            |        |  |     |        Textual Convention: DisplayString
+            |        |  |     |        Size: 0..255
+            |        |  |     +-- -R-- String    mSerial(7)
+            |        |  |     |        Textual Convention: DisplayString
+            |        |  |     |        Size: 0..255
+            |        |  |     +-- -R-- String    mIMSI(8)
+            |        |  |     |        Textual Convention: DisplayString
+            |        |  |     |        Size: 0..255
+            |        |  |     +-- -R-- String    mSimState(9)
+            |        |  |     |        Textual Convention: DisplayString
+            |        |  |     |        Size: 0..255
+            |        |  |     +-- -R-- String    mPinState(10)
+            |        |  |     |        Textual Convention: DisplayString
+            |        |  |     |        Size: 0..255
+            |        |  |     +-- -R-- String    mNetState(11)
+            |        |  |     |        Textual Convention: DisplayString
+            |        |  |     |        Size: 0..255
+            |        |  |     +-- -R-- String    mSignal(12)
+            |        |  |     |        Textual Convention: DisplayString
+            |        |  |     |        Size: 0..255
+            |        |  |     +-- -R-- String    mOperator(13)
+            |        |  |     |        Textual Convention: DisplayString
+            |        |  |     |        Size: 0..255
+            |        |  |     +-- -R-- String    mOperatorNumber(14)
+            |        |  |     |        Textual Convention: DisplayString
+            |        |  |     |        Size: 0..255
+            |        |  |     +-- -R-- String    mConnectionState(15)
+            |        |  |     |        Textual Convention: DisplayString
+            |        |  |     |        Size: 0..255
+            |        |  |     +-- -R-- String    mNetworkType(16)
+            |        |  |     |        Textual Convention: DisplayString
+            |        |  |     |        Size: 0..255
+            |        |  |     +-- -R-- INTEGER   mTemperature(17)
+            |        |  |     +-- -R-- String    mCellID(18)
+            |        |  |     |        Textual Convention: DisplayString
+            |        |  |     |        Size: 0..255
+            |        |  |     +-- -R-- String    mSINR(19)
+            |        |  |     |        Textual Convention: DisplayString
+            |        |  |     |        Size: 0..255
+            |        |  |     +-- -R-- String    mRSRP(20)
+            |        |  |     |        Textual Convention: DisplayString
+            |        |  |     |        Size: 0..255
+            |        |  |     +-- -R-- String    mRSRQ(21)
+            |        |  |     |        Textual Convention: DisplayString
+            |        |  |     |        Size: 0..255
+            |        |  |     +-- -R-- Counter64 mSent(22)
+            |        |  |     +-- -R-- Counter64 mReceived(23)
+            |        |  |     +-- -R-- String    mIP(24)
+            |        |  |     |        Textual Convention: DisplayString
+            |        |  |     |        Size: 0..255
+            |        |  |     +-- -R-- Counter64 mSentToday(25)
+            |        |  |     +-- -R-- Counter64 mReceivedToday(26)
+            |        |  |     +-- -R-- String    mICCID(27)
+            |        |  |     |        Textual Convention: DisplayString
+            |        |  |     |        Size: 0..255
+            |        |  |     +-- -R-- Counter64 mSentCurrentWeek(28)
+            |        |  |     +-- -R-- Counter64 mReceivedCurrentWeek(29)
+            |        |  |     +-- -R-- Counter64 mSentCurrentMonth(30)
+            |        |  |     +-- -R-- Counter64 mReceivedCurrentMonth(31)
+            |        |  |
+            |        |  +-- -R-- Unsigned  connectionUptime(3)
+            |        |
+            |        +--notifications(4)
+            |        |  |
+            |        |  +--mobileNotifications(1)
+            |        |  |  |
+            |        |  |  +--signalChangeNotification(1)
+            |        |  |  +--networkTypeNotification(2)
+            |        |  |
+            |        |  +--ioNotifications(2)
+            |        |  |  |
+            |        |  |  +--digitalInputNotification(1)
+            |        |  |  +--digitalOutputNotification(2)
+            |        |  |
+            |        |  +--hotspotNotifications(3)
+            |        |  |  |
+            |        |  |  +--clientConnectedNotification(1)
+            |        |  |  +--clientDisconnectedNotification(2)
+            |        |  |
+            |        |  +--eventNotifications(4)
+            |        |     |
+            |        |     +--eventLogNotification(1)
+            |        |
+            |        +--hotspot(5)
+            |        |  |
+            |        |  +-- -R-- EnumVal   hsState(1)
+            |        |  |        Values: disabled(0), enabled(1)
+            |        |  +-- -R-- IpAddr    hsIP(2)
+            |        |  +-- -R-- String    hsNet(3)
+            |        |  |        Textual Convention: DisplayString
+            |        |  |        Size: 0..255
+            |        |  +-- -R-- String    hsAuth(4)
+            |        |  |        Textual Convention: DisplayString
+            |        |  |        Size: 0..255
+            |        |  +-- -R-- Counter64 hsSessionCount(5)
+            |        |  |
+            |        |  +--hsSessionTable(6)
+            |        |     |
+            |        |     +--hsSessionEntry(1)
+            |        |        |  Index: hssIndex
+            |        |        |
+            |        |        +-- -R-- INTEGER   hssIndex(1)
+            |        |        |        Range: 0..65535
+            |        |        +-- -R-- String    hssMAC(2)
+            |        |        |        Textual Convention: PhysAddress
+            |        |        +-- -R-- IpAddr    hssIP(3)
+            |        |        +-- -R-- String    hssID(4)
+            |        |        |        Textual Convention: DisplayString
+            |        |        |        Size: 0..255
+            |        |        +-- -R-- String    hssUsername(5)
+            |        |        |        Textual Convention: DisplayString
+            |        |        |        Size: 0..255
+            |        |        +-- -R-- EnumVal   hssState(6)
+            |        |        |        Values: notAuthorized(0), authorized(1)
+            |        |        +-- -R-- Counter64 hssDwLimit(7)
+            |        |        +-- -R-- Counter64 hssUpLimit(8)
+            |        |        +-- -R-- Counter64 hssTimeLimit(9)
+            |        |        +-- -R-- Integer32 hssIdleTimeout(10)
+            |        |        +-- -R-- Counter64 hssDwBandwidth(11)
+            |        |        +-- -R-- Counter64 hssUpBandwidth(12)
+            |        |        +-- -R-- String    hssURL(13)
+            |        |                 Textual Convention: DisplayString
+            |        |                 Size: 0..255
+            |        |
+            |        +--io(6)
+            |        |  |
+            |        |  +-- -R-- INTEGER   ioCount(1)
+            |        |  |
+            |        |  +--ioTable(2)
+            |        |     |
+            |        |     +--ioEntry(1)
+            |        |        |  Index: ioIndex
+            |        |        |
+            |        |        +-- -R-- INTEGER   ioIndex(1)
+            |        |        |        Range: 0..65535
+            |        |        +-- -R-- String    ioSystemName(2)
+            |        |        |        Textual Convention: DisplayString
+            |        |        |        Size: 0..255
+            |        |        +-- -R-- String    ioName(3)
+            |        |        |        Textual Convention: DisplayString
+            |        |        |        Size: 0..255
+            |        |        +-- -R-- String    ioType(4)
+            |        |        |        Textual Convention: DisplayString
+            |        |        |        Size: 0..255
+            |        |        +-- -R-- INTEGER   ioBidirectional(5)
+            |        |        +-- -R-- String    ioState(6)
+            |        |        |        Textual Convention: DisplayString
+            |        |        |        Size: 0..255
+            |        |        +-- -R-- INTEGER   ioInput(7)
+            |        |        +-- -R-- INTEGER   ioInverted(8)
+            |        |        +-- -R-- String    ioCurrent(9)
+            |        |        |        Textual Convention: DisplayString
+            |        |        |        Size: 0..255
+            |        |        +-- -R-- String    ioPercentage(10)
+            |        |        |        Textual Convention: DisplayString
+            |        |        |        Size: 0..255
+            |        |        +-- -R-- EnumVal   ioStateNumeric(11)
+            |        |                 Values: na(-1), low(0), high(1)
+            |        |
+            |        +--wireless(7)
+            |        |  |
+            |        |  +-- -R-- INTEGER   radioCount(1)
+            |        |  |
+            |        |  +--radioTable(2)
+            |        |  |  |
+            |        |  |  +--radioEntry(1)
+            |        |  |     |  Index: radioIndex
+            |        |  |     |
+            |        |  |     +-- -R-- INTEGER   radioIndex(1)
+            |        |  |     |        Range: 0..65535
+            |        |  |     +-- -R-- String    radioName(2)
+            |        |  |     |        Textual Convention: DisplayString
+            |        |  |     |        Size: 0..255
+            |        |  |     +-- -R-- INTEGER   radioUpState(3)
+            |        |  |     +-- -R-- INTEGER   radioDisabledState(4)
+            |        |  |     +-- -R-- String    radioChannel(5)
+            |        |  |              Textual Convention: DisplayString
+            |        |  |              Size: 0..255
+            |        |  |
+            |        |  +-- -R-- INTEGER   wIfaceCount(3)
+            |        |  |
+            |        |  +--wIfaceTable(4)
+            |        |  |  |
+            |        |  |  +--wIfaceEntry(1)
+            |        |  |     |  Index: wIfaceIndex
+            |        |  |     |
+            |        |  |     +-- -R-- INTEGER   wIfaceIndex(1)
+            |        |  |     |        Range: 0..65535
+            |        |  |     +-- -R-- String    wIfaceSSID(2)
+            |        |  |     |        Textual Convention: DisplayString
+            |        |  |     |        Size: 0..255
+            |        |  |     +-- -R-- INTEGER   wIfaceHidden(3)
+            |        |  |     +-- -R-- String    wIfaceEncryption(4)
+            |        |  |     |        Textual Convention: DisplayString
+            |        |  |     |        Size: 0..255
+            |        |  |     +-- -R-- String    wIfaceMode(5)
+            |        |  |     |        Textual Convention: DisplayString
+            |        |  |     |        Size: 0..255
+            |        |  |     +-- -R-- INTEGER   wIfaceClientCount(6)
+            |        |  |
+            |        |  +--wIfaceClientTable(5)
+            |        |     |
+            |        |     +--wIfaceClientEntry(1)
+            |        |        |  Index: wIfaceClientIndex
+            |        |        |
+            |        |        +-- -R-- INTEGER   wIfaceClientIndex(1)
+            |        |        |        Range: 0..65535
+            |        |        +-- -R-- INTEGER   wIfaceClientInterfaceIndex(2)
+            |        |        +-- -R-- String    wIfaceClientMAC(3)
+            |        |                 Textual Convention: DisplayString
+            |        |                 Size: 0..255
+            |        |
+            |        +--vlan(8)
+            |        |  |
+            |        |  +-- -R-- INTEGER   pVlanCount(1)
+            |        |  |
+            |        |  +--pVlanTable(2)
+            |        |  |  |
+            |        |  |  +--pVlanEntry(1)
+            |        |  |     |  Index: pVlanIndex
+            |        |  |     |
+            |        |  |     +-- -R-- INTEGER   pVlanIndex(1)
+            |        |  |     |        Range: 0..65535
+            |        |  |     +-- -R-- INTEGER   pVlanNum(2)
+            |        |  |     +-- -R-- String    pVlanPorts(3)
+            |        |  |     |        Textual Convention: DisplayString
+            |        |  |     |        Size: 0..255
+            |        |  |     +-- -R-- INTEGER   pVlanVID(4)
+            |        |  |
+            |        |  +-- -R-- INTEGER   iVlanCount(3)
+            |        |  |
+            |        |  +--iVlanTable(4)
+            |        |     |
+            |        |     +--iVlanEntry(1)
+            |        |        |  Index: iVlanIndex
+            |        |        |
+            |        |        +-- -R-- INTEGER   iVlanIndex(1)
+            |        |        |        Range: 0..65535
+            |        |        +-- -R-- String    iVlanName(2)
+            |        |        |        Textual Convention: DisplayString
+            |        |        |        Size: 0..255
+            |        |        +-- -R-- String    iVlanType(3)
+            |        |        |        Textual Convention: DisplayString
+            |        |        |        Size: 0..255
+            |        |        +-- -R-- String    iVlanIfName(4)
+            |        |        |        Textual Convention: DisplayString
+            |        |        |        Size: 0..255
+            |        |        +-- -R-- INTEGER   iVlanVID(5)
+            |        |
+            |        +--sqm(9)
+            |        |  |
+            |        |  +-- -R-- INTEGER   queueCount(1)
+            |        |  |
+            |        |  +--queueTable(2)
+            |        |     |
+            |        |     +--queueEntry(1)
+            |        |        |  Index: queueIndex
+            |        |        |
+            |        |        +-- -R-- INTEGER   queueIndex(1)
+            |        |        |        Range: 0..65535
+            |        |        +-- -R-- String    queueName(2)
+            |        |        |        Textual Convention: DisplayString
+            |        |        |        Size: 0..255
+            |        |        +-- -R-- INTEGER   queueEnabled(3)
+            |        |        +-- -R-- String    queueIface(4)
+            |        |        |        Textual Convention: DisplayString
+            |        |        |        Size: 0..255
+            |        |        +-- -R-- INTEGER   queueDownLimit(5)
+            |        |        +-- -R-- INTEGER   queueUpLimit(6)
+            |        |        +-- -R-- String    queueQdisk(7)
+            |        |        |        Textual Convention: DisplayString
+            |        |        |        Size: 0..255
+            |        |        +-- -R-- String    queueScript(8)
+            |        |                 Textual Convention: DisplayString
+            |        |                 Size: 0..255
+            |        |
+            |        +--port(10)
+            |        |  |
+            |        |  +-- -R-- Integer32 portCount(1)
+            |        |  |
+            |        |  +--portTable(2)
+            |        |  |  |
+            |        |  |  +--portEntry(1)
+            |        |  |     |  Index: pIndex
+            |        |  |     |
+            |        |  |     +-- -R-- INTEGER   pIndex(1)
+            |        |  |     |        Range: 0..65535
+            |        |  |     +-- -R-- String    pName(2)
+            |        |  |     |        Textual Convention: DisplayString
+            |        |  |     |        Size: 0..255
+            |        |  |     +-- -R-- INTEGER   pNumber(3)
+            |        |  |     +-- -R-- INTEGER   pPosition(4)
+            |        |  |     +-- -R-- String    pState(5)
+            |        |  |     |        Textual Convention: DisplayString
+            |        |  |     |        Size: 0..255
+            |        |  |     +-- -R-- INTEGER   pSpeed(6)
+            |        |  |     +-- -R-- String    pDuplex(7)
+            |        |  |              Textual Convention: DisplayString
+            |        |  |              Size: 0..255
+            |        |  |
+            |        |  +--pLANTable(3)
+            |        |     |
+            |        |     +--pLANEntry(1)
+            |        |        |  Index: pLANIndex
+            |        |        |
+            |        |        +-- -R-- INTEGER   pLANIndex(1)
+            |        |        |        Range: 0..65535
+            |        |        +-- -R-- String    pLANMAC(2)
+            |        |                 Textual Convention: DisplayString
+            |        |                 Size: 0..255
+            |        |
+            |        +--mwan3(12)
+            |        |  |
+            |        |  +-- -R-- INTEGER   mwan3Count(1)
+            |        |  |
+            |        |  +--mwan3Table(2)
+            |        |     |
+            |        |     +--mwan3Entry(1)
+            |        |        |  Index: mwan3Index
+            |        |        |
+            |        |        +-- -R-- INTEGER   mwan3Index(1)
+            |        |        |        Range: 0..65535
+            |        |        +-- -R-- String    mwan3Name(2)
+            |        |        |        Textual Convention: DisplayString
+            |        |        |        Size: 0..255
+            |        |        +-- -R-- INTEGER   mwan3Enabled(3)
+            |        |        +-- -R-- INTEGER   mwan3Uptime(4)
+            |        |        +-- -R-- String    mwan3Status(5)
+            |        |        |        Textual Convention: DisplayString
+            |        |        |        Size: 0..255
+            |        |        +-- -R-- String    mwan3Ip(6)
+            |        |                 Textual Convention: DisplayString
+            |        |                 Size: 0..255
+            |        |
+            |        +--universalGateway(20)
+            |           |
+            |           +--tagTable(1)
+            |           |  |
+            |           |  +--tagEntry(1)
+            |           |     |  Index: tagIndex
+            |           |     |
+            |           |     +-- -R-- INTEGER   tagIndex(1)
+            |           |     +-- -R-- String    tagId(2)
+            |           |     |        Textual Convention: DisplayString
+            |           |     |        Size: 0..255
+            |           |     +-- -R-- String    tagPrettyName(3)
+            |           |     |        Textual Convention: DisplayString
+            |           |     |        Size: 0..255
+            |           |     +-- -R-- EnumVal   tagSource(4)
+            |           |     |        Values: mbus(1), modbus(2), other(3)
+            |           |     +-- -R-- EnumVal   tagPermissions(5)
+            |           |     |        Values: none(0), read(1), write(2)
+            |           |     +-- -R-- EnumVal   tagType(6)
+            |           |     |        Values: unknown(0), bool(1), int8(2), uint8(3), int16(4), uint16(5), int32(6), uint32(7), int64(8), uint64(9), float32(10), float64(11), string(12), binary(13)
+            |           |     +-- -R-- INTEGER   tagValueSize(7)
+            |           |     |        Range: 0..65535
+            |           |     +-- -R-- Unsigned  tagTimestamp(8)
+            |           |
+            |           +--tagValueTable(2)
+            |              |
+            |              +--tagValueEntry(1)
+            |                 |  Index: tagValueIndex, tagIndex
+            |                 |
+            |                 +-- -R-- INTEGER   tagValueIndex(1)
+            |                 +-- -RW- String    tagValue(2)
+            |
+            +--security(5)
+            |
+            +--snmpV2(6)
+               |
+               +--snmpDomains(1)
+               |
+               +--snmpProxys(2)
+               |
+               +--snmpModules(3)

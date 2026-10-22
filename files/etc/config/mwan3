@@ -13,6 +13,7 @@ config interface 'wan'
         option down '3'
         option up '3'
         list flush_conntrack 'connected'
+        list flush_conntrack 'disconnected'
 
 config interface 'cwan'
         option enabled '1'
