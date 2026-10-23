@@ -1,0 +1,12 @@
+
+config watchcat
+	option period '5m'
+	option mode 'ping_reboot'
+	option forcedelay '1m'
+	option addressfamily 'ipv4'
+	option pingperiod '30s'
+	option pingsize 'small'
+	list pinghosts '8.8.8.8'
+	list pinghosts '1.1.1.1'
+	list pinghosts '8.8.4.4'
+
