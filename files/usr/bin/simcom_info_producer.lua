@@ -571,10 +571,10 @@ serial:setvbuf("no")
 DisableATCommandEcho(serial)
 
 Ati = GetATI(serial)
-for k, v in pairs(Ati) do
-	print(string.format("\t%-15s : %s", k, v))
-	WriteTmp(k, v)
-end
+-- for k, v in pairs(Ati) do
+-- 	print(string.format("\t%-15s : %s", k, v))
+-- 	WriteTmp(k, v)
+-- end
 
 SerialNum = GetSerialNumber(serial)
 WriteTmp("serial", SerialNum)
@@ -595,10 +595,10 @@ Signal = GetSignal(serial)
 WriteTmp("signal", Signal)
 
 Cpsi = GetCPSI(serial)
-for k, v in pairs(Cpsi) do
-	print(string.format("\t%-15s : %s", k, v))
-	WriteTmp(k, v)
-end
+-- for k, v in pairs(Cpsi) do
+-- 	print(string.format("\t%-15s : %s", k, v))
+-- 	WriteTmp(k, v)
+-- end
 
 ConnState = GetConnectionState(serial)
 WriteTmp("connection_state", ConnState)
