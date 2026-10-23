@@ -6563,8 +6563,8 @@ CONFIG_PACKAGE_ppp-mod-pppoe=y
 # CONFIG_PACKAGE_sing-box-tiny is not set
 # CONFIG_PACKAGE_slirp4netns is not set
 # CONFIG_PACKAGE_smbinfo is not set
-# CONFIG_PACKAGE_snmp-mibs is not set
-# CONFIG_PACKAGE_snmp-utils-nossl is not set
+CONFIG_PACKAGE_snmp-mibs=y
+CONFIG_PACKAGE_snmp-utils-nossl=y
 # CONFIG_PACKAGE_snmp-utils-ssl is not set
 CONFIG_PACKAGE_snmpd-nossl=y
 # CONFIG_PACKAGE_snmpd-ssl is not set
