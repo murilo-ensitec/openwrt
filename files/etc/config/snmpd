@@ -104,6 +104,6 @@ config pass
 
 config pass
         option name 'simcom_info'
-	option miboid '.1.3.6.1.4.1.48690.3'
+	option miboid '.1.3.6.1.4.1.48690.2'
 	option prog '/usr/libexec/snmp/simcom_info.sh'
 	option persist '0'
