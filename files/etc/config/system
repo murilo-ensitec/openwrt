@@ -1,0 +1,28 @@
+
+config system
+	option hostname 'OpenWrt-Ensitec'
+	option zonename	'America/Sao_Paulo'
+	option timezone '<-03>3'
+	option ttylogin '1'
+	option log_size '128'
+	option urandom_seed '0'
+	option compat_version '1.0'
+        option log_ip '192.168.16.107'
+        option log_port '514'
+        option log_proto 'udp'
+
+config timeserver 'ntp'
+	option enabled '1'
+	option enable_server '0'
+	list server '0.openwrt.pool.ntp.org'
+	list server '1.openwrt.pool.ntp.org'
+	list server '2.openwrt.pool.ntp.org'
+	list server '3.openwrt.pool.ntp.org'
+
+config led 'led_wifi_led'
+        option name 'wifi'
+        option sysfs 'wifi_led'
+        option trigger 'netdev'
+        option dev 'phy0-sta0'
+        list mode 'tx'
+        list mode 'rx'

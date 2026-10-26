@@ -2,7 +2,13 @@ config defaults
         option input 'REJECT'
         option output 'ACCEPT'
         option forward 'REJECT'
+# Defense against DDOS attacks
         option synflood_protect '1'
+	option synflood_rate '25'
+	option synflood_burst '50'
+	option tcp_syncookies '1'
+# Defense against port-scanners
+	option drop_invalid '1'
 
 config zone
         option name 'lan'

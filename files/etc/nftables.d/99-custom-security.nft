@@ -1,0 +1,25 @@
+# IP Black list
+set ssh_ban_list {
+	type ipv4_addr
+	flags timeout
+	timeout 1h
+}
+
+chain ensitec_protection_rulesi {
+	type filter hook input priority -5; policy accept;
+
+	tcp flags & (fin|syn|rst|psh|ack|urg) == 0 counter drop comment "Drop NULL Scan"
+	tcp flags & (fin|psh|urg) == fin|psh|urg counter drop comment "Drop XMAS Scan"
+	tcp flags & (syn|fin) == syn|fin counter drop comment "Drop SYN-FIN Scan"
+	tcp flags & (syn|rst) == syn|rst counter drop comment "Drop SYN-RST Scan"
+	tcp flags & (fin|syn|rst|psh|ack|urg) == fin counter drop comment "Drop FIN Scan"
+
+	# Reject black-listed
+	ip saddr @ssh_ban_list reject with tcp reset
+	
+	# Put atackers in black-list
+	tcp dport 22 ct state new limit rate over 3/minute burst 5 packets \
+	log prefix "FW-SSH-BAN-NEW: " \
+        update @ssh_ban_list { ip saddr timeout 1h } \
+        reject with tcp reset comment "Ban IP for SSH Bruteforce"
+}
