@@ -1,0 +1,9 @@
+root:$5$pcoUg0ez1u/lGRfV$0y4J0Dnv.9akocvxX46shZkvzP/jUCuEXVC0qrWCsw/:20752:0:99999:7:::
+daemon:*:0:0:99999:7:::
+ftp:*:0:0:99999:7:::
+network:*:0:0:99999:7:::
+nobody:*:0:0:99999:7:::
+ntp:x:0:0:99999:7:::
+dnsmasq:x:0:0:99999:7:::
+logd:x:0:0:99999:7:::
+ubus:x:0:0:99999:7:::
