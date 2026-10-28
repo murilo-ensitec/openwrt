@@ -45,11 +45,13 @@ jobs:
 
       - name: Apply configuration
         run: |
+          cp diffconfig .config
+
           if [ "${{ matrix.profile }}" = "full" ]; then
             echo "Merging optional packages..."
             cat optional_packages.config >> .config
           fi
-          
+
           make defconfig
 
       - name: Inject Custom Files (Password)
