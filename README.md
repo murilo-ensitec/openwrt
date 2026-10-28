@@ -20,7 +20,7 @@ O desenvolvimento é focado no **Debian** (ou distribuições derivadas), pois e
 
 ## Quickstart
 
-Este repositório é um fork do OpenWrt adaptado para o hardware da Ensitec. A branch principal (`master`) é alinhada com a versão **`openwrt-25.12`**.
+Este repositório é um fork do OpenWrt adaptado para o hardware da Ensitec. A branch principal (`master`) é feita em cima da branch **`openwrt-25.12`** do repositório original do OpenWrt.
 
 ### Gestão de Configurações (`diffconfig`)
 * **Configuração mínima:** Mantida no arquivo `diffconfig`. Qualquer novo pacote essencial ao funcionamento base do firmware deve ser adicionado gerando uma nova versão desse arquivo (conforme as instruções do OpenWrt).
@@ -29,8 +29,8 @@ Este repositório é um fork do OpenWrt adaptado para o hardware da Ensitec. A b
 ### Passo a Passo de Build
 
 1. Atualize as definições de pacotes listadas no `feeds.conf`:
-   ```bash
-   ./scripts/feeds update -a
+```bash
+./scripts/feeds update -a
 
 ```
 
@@ -43,17 +43,23 @@ Este repositório é um fork do OpenWrt adaptado para o hardware da Ensitec. A b
 
 3. Configure a toolchain, target system e pacotes do firmware:
 ```bash
+# Caso queira configurar manualmente
 make menuconfig
 
-```
+# Caso queira utilizar as configurações prontas
+cp diffconfig .config
+# Caso queira utilizar as configurações opcionais
+cat optional_packages.config >> .config
 
+
+make defconfig
+```
 
 4. Inicie o processo de compilação (fará o download dos fontes, criará a toolchain e compilará a imagem final):
 ```bash
-make
-
+make download
+make -j$(($(nproc)+1)) V=s
 ```
-
 
 
 ---
