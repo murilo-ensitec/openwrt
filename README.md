@@ -61,6 +61,9 @@ make download
 make -j$(($(nproc)+1)) V=s
 ```
 
+### Instalação
+
+Para saber como gravar e instalar o firmware no equipamento, consulte o guia de instalação em [docs/using.md](docs/using.md).
 
 ---
 
