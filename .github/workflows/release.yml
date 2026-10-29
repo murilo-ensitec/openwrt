@@ -43,6 +43,18 @@ jobs:
           ./scripts/feeds update -a
           ./scripts/feeds install -a
 
+      - name: Inject custom version file
+        run: |
+          VERSION_NAME="${GITHUB_REF_NAME}"
+          
+          echo "Setting router /etc/version to: ${VERSION_NAME}"
+          
+          # Create files/etc directory in the build root
+          mkdir -p files/etc
+          
+          # Write version string directly to /etc/version
+          echo "${VERSION_NAME}" > files/etc/version
+
       - name: Apply configuration
         run: |
           cp diffconfig .config
