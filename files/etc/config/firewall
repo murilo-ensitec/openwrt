@@ -16,6 +16,7 @@ config zone
         option input 'ACCEPT'
         option output 'ACCEPT'
         option forward 'ACCEPT'
+        list device 'tun0'
 
 config zone
         option name 'wan'
