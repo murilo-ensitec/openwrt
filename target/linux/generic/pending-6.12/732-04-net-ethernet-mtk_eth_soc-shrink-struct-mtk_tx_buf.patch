@@ -1,3 +1,4 @@
+From 3e6d5be3d938383507631a9f20905747fe9d728a Mon Sep 17 00:00:00 2001
 From: Felix Fietkau <nbd@nbd.name>
 Date: Mon, 14 Jul 2025 10:52:59 +0200
 Subject: [PATCH] net: ethernet: mtk_eth_soc: shrink struct mtk_tx_buf
@@ -91,7 +92,7 @@ Signed-off-by: Felix Fietkau <nbd@nbd.name>
  
 --- a/drivers/net/ethernet/mediatek/mtk_eth_soc.h
 +++ b/drivers/net/ethernet/mediatek/mtk_eth_soc.h
-@@ -701,14 +701,6 @@ struct mtk_hw_stats {
+@@ -706,14 +706,6 @@ struct mtk_hw_stats {
  	struct u64_stats_sync	syncp;
  };
  
@@ -106,7 +107,7 @@ Signed-off-by: Felix Fietkau <nbd@nbd.name>
  /* This enum allows us to identify how the clock is defined on the array of the
   * clock in the order
   */
-@@ -881,13 +873,12 @@ enum mtk_tx_buf_type {
+@@ -886,13 +878,12 @@ enum mtk_tx_buf_type {
   */
  struct mtk_tx_buf {
  	enum mtk_tx_buf_type type;

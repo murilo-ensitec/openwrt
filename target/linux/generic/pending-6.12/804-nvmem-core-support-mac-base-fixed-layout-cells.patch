@@ -1,3 +1,4 @@
+From 61f674df4f0ce2b1c53b0b7f6b0c1d03d99838c0 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Rafa=C5=82=20Mi=C5=82ecki?= <rafal@milecki.pl>
 Date: Thu, 13 Jul 2023 18:29:19 +0200
 Subject: [PATCH] nvmem: core: support "mac-base" fixed layout cells
@@ -93,10 +94,10 @@ string.
 +	return 0;
 +}
 +
- static int nvmem_add_cells_from_dt(struct nvmem_device *nvmem, struct device_node *np)
+ int nvmem_add_cells_from_dt(struct nvmem_device *nvmem, struct device_node *np)
  {
  	struct device *dev = &nvmem->dev;
-@@ -852,6 +911,25 @@ static int nvmem_add_cells_from_dt(struc
+@@ -852,6 +911,25 @@ int nvmem_add_cells_from_dt(struct nvmem
  		if (nvmem->fixup_dt_cell_info)
  			nvmem->fixup_dt_cell_info(nvmem, &info);
  

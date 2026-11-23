@@ -1,4 +1,6 @@
+From acbcd5f5b5465b28f966abd7f8da98062ba09935 Mon Sep 17 00:00:00 2001
 From: Daniel Golle <daniel@makrotopia.org>
+Date: Wed, 11 Jun 2014 12:59:10 +0000
 Subject: ubi: auto-attach mtd device named "ubi" or "data" on boot
 
 Signed-off-by: Daniel Golle <daniel@makrotopia.org>
@@ -8,7 +10,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 
 --- a/drivers/mtd/ubi/build.c
 +++ b/drivers/mtd/ubi/build.c
-@@ -1263,6 +1263,80 @@ static struct mtd_notifier ubi_mtd_notif
+@@ -1264,6 +1264,80 @@ static struct mtd_notifier ubi_mtd_notif
  	.remove = ubi_notify_remove,
  };
  
@@ -89,7 +91,7 @@ Signed-off-by: Daniel Golle <daniel@makrotopia.org>
  static int __init ubi_init_attach(void)
  {
  	int err, i, k;
-@@ -1314,6 +1388,12 @@ static int __init ubi_init_attach(void)
+@@ -1315,6 +1389,12 @@ static int __init ubi_init_attach(void)
  		}
  	}
  

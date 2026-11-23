@@ -1,3 +1,4 @@
+From 44fe9e6f84ee25e04391e467a177e57c783d1975 Mon Sep 17 00:00:00 2001
 From: Felix Fietkau <nbd@nbd.name>
 Date: Fri, 4 Sep 2020 18:33:27 +0200
 Subject: [PATCH] pcie-mediatek: fix clearing interrupt status
@@ -10,7 +11,7 @@ Signed-off-by: Felix Fietkau <nbd@nbd.name>
 
 --- a/drivers/pci/controller/pcie-mediatek.c
 +++ b/drivers/pci/controller/pcie-mediatek.c
-@@ -601,9 +601,9 @@ static void mtk_pcie_intr_handler(struct
+@@ -616,9 +616,9 @@ static void mtk_pcie_intr_handler(struct
  	if (status & INTX_MASK) {
  		for_each_set_bit_from(bit, &status, PCI_NUM_INTX + INTX_SHIFT) {
  			/* Clear the INTx */

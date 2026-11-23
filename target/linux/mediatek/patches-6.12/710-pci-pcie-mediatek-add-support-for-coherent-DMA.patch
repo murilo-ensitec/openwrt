@@ -1,3 +1,4 @@
+From 920d975cab67dff2f7720c4af24fe7e03ff9019a Mon Sep 17 00:00:00 2001
 From: Felix Fietkau <nbd@nbd.name>
 Date: Fri, 4 Sep 2020 18:42:42 +0200
 Subject: [PATCH] pci: pcie-mediatek: add support for coherent DMA
@@ -41,7 +42,7 @@ Signed-off-by: Felix Fietkau <nbd@nbd.name>
  	};
 --- a/drivers/pci/controller/pcie-mediatek.c
 +++ b/drivers/pci/controller/pcie-mediatek.c
-@@ -20,6 +20,7 @@
+@@ -22,6 +22,7 @@
  #include <linux/of_address.h>
  #include <linux/of_pci.h>
  #include <linux/of_platform.h>
@@ -49,7 +50,7 @@ Signed-off-by: Felix Fietkau <nbd@nbd.name>
  #include <linux/pci.h>
  #include <linux/phy/phy.h>
  #include <linux/platform_device.h>
-@@ -139,6 +140,11 @@
+@@ -141,6 +142,11 @@
  #define PCIE_LINK_STATUS_V2	0x804
  #define PCIE_PORT_LINKUP_V2	BIT(10)
  
@@ -61,7 +62,7 @@ Signed-off-by: Felix Fietkau <nbd@nbd.name>
  struct mtk_pcie_port;
  
  /**
-@@ -1054,6 +1060,27 @@ static int mtk_pcie_setup(struct mtk_pci
+@@ -1069,6 +1075,27 @@ static int mtk_pcie_setup(struct mtk_pci
  	struct mtk_pcie_port *port, *tmp;
  	int err, slot;
  

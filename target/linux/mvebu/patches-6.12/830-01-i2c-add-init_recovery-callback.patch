@@ -1,4 +1,4 @@
-From patchwork Sun May 11 13:31:05 2025
+From dfacae304915bcd316ac2d8c69bfe3f15749f5fa Mon Sep 17 00:00:00 2001
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -147,7 +147,7 @@ Reviewed-by: Linus Walleij <linus.walleij@linaro.org>
 
 --- a/drivers/i2c/i2c-core-base.c
 +++ b/drivers/i2c/i2c-core-base.c
-@@ -427,12 +427,18 @@ static int i2c_init_recovery(struct i2c_
+@@ -428,12 +428,18 @@ static int i2c_init_recovery(struct i2c_
  	struct i2c_bus_recovery_info *bri = adap->bus_recovery_info;
  	bool is_error_level = true;
  	char *err_str;

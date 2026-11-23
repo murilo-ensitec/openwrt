@@ -1,4 +1,6 @@
+From 336a531c15e7fa5f8a42a7b9f2662c249aafce89 Mon Sep 17 00:00:00 2001
 From: Tobias Schramm <tobias@t-sys.eu>
+Date: Mon, 26 Feb 2024 12:47:29 +0100
 Subject: mvpp2: support fetching mac address from nvmem
 
 The mvpp2 driver did not query nvmem for hardware mac addresses. This
@@ -12,7 +14,7 @@ Signed-off-by: Tobias Schramm <tobias@t-sys.eu>
 ---
 --- a/drivers/net/ethernet/marvell/mvpp2/mvpp2_main.c
 +++ b/drivers/net/ethernet/marvell/mvpp2/mvpp2_main.c
-@@ -6198,6 +6198,12 @@ static int mvpp2_port_copy_mac_addr(stru
+@@ -6199,6 +6199,12 @@ static int mvpp2_port_copy_mac_addr(stru
  		return 0;
  	}
  

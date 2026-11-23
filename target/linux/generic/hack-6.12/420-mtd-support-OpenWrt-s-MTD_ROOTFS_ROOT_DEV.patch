@@ -1,3 +1,4 @@
+From d33e49857e3ad76586ebe55334996b15cd45ca1b Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Rafa=C5=82=20Mi=C5=82ecki?= <rafal@milecki.pl>
 Date: Mon, 7 Nov 2022 23:48:24 +0100
 Subject: [PATCH] mtd: support OpenWrt's MTD_ROOTFS_ROOT_DEV
@@ -12,7 +13,7 @@ Signed-off-by: Rafał Miłecki <rafal@milecki.pl>
 
 --- a/drivers/mtd/mtdcore.c
 +++ b/drivers/mtd/mtdcore.c
-@@ -780,7 +780,8 @@ int add_mtd_device(struct mtd_info *mtd)
+@@ -787,7 +787,8 @@ int add_mtd_device(struct mtd_info *mtd)
  
  	mutex_unlock(&mtd_table_mutex);
  
